@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "678405144548",
+    "project_id": "geolore-e764f",
+    "storage_bucket": "geolore-e764f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:678405144548:android:9d05c325a353d2e62411f1",
+        "android_client_info": {
+          "package_name": "com.example.geo_lore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA91Q1Zb-JOXT-e0NBgkb0FLrXHILnsb4U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
