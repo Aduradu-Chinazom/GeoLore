@@ -160,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: const Text(
                 'Login',
                 style: TextStyle(
-                  color: const Color.fromARGB(255, 78, 48, 37),
+                  color: Color.fromARGB(255, 78, 48, 37),
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
@@ -172,7 +172,7 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  // ✅ STEP 2
+  //  STEP 2
   Widget buildStepTwo() {
     return Column(
       key: const ValueKey(2),
@@ -280,7 +280,8 @@ class _RegisterPageState extends State<RegisterPage> {
               child: const Text(
                 'Login',
                 style: TextStyle(
-                  color: const Color.fromARGB(255, 78, 48, 37),
+
+                  color: Color.fromARGB(255, 78, 48, 37),
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),

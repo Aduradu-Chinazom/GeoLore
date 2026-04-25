@@ -6,6 +6,7 @@ import 'register_page.dart';
 import 'login_page.dart';
 import 'welcome_page.dart';
 import 'origin_page.dart';
+import 'home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/register': (context) => const RegisterPage(),
         '/welcome': (context) => const WelcomePage(),
         '/origin': (context) => const OriginPage(),
+        '/home': (context) => const HomePage(),
       },
     );
   }

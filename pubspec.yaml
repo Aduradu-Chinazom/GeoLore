@@ -63,6 +63,13 @@ flutter:
   assets:
     - assets/Charming chibi tiger cub.png
     - assets/logo.png
+    - assets/culture.png
+    - assets/ai_tutor.png
+    - assets/event.png
+    - assets/community.png
+    - assets/flag.png
+    - assets/string_flags.png
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
