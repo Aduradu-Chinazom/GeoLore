@@ -7,6 +7,8 @@ import 'login_page.dart';
 import 'welcome_page.dart';
 import 'origin_page.dart';
 import 'home.dart';
+import 'your_culture.dart';
+import 'history.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +35,8 @@ class MyApp extends StatelessWidget {
         '/welcome': (context) => const WelcomePage(),
         '/origin': (context) => const OriginPage(),
         '/home': (context) => const HomePage(),
+        '/your_culture': (context) => const CulturePage(),
+        '/history': (context) => const HistoryPage(),
       },
     );
   }

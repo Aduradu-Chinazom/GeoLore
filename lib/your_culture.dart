@@ -6,7 +6,7 @@ class CulturePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFFFFFDF1),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -16,44 +16,78 @@ class CulturePage extends StatelessWidget {
               const SizedBox(height: 25),
 
               // Search bar
-              Row(
+                Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 25,
-                        vertical: 3,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
-                        borderRadius: BorderRadius.circular(25),
-                        border: Border.all(color: const Color.fromARGB(255, 227, 77, 77), width: 1),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
+                    child: SizedBox(
+                      height: 70,
+                      child: Stack(
+                        clipBehavior: Clip.none,
                         children: [
-                          const Icon(Icons.search, color: Colors.grey, size: 22),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Search',
-                                border: InputBorder.none,
-                                hintStyle: TextStyle(
-                                  color: Colors.grey,
-                                  fontSize: 16,
+                          Positioned(
+                            left: 0,
+                            top: -20,
+                            child: Image.asset(
+                              'assets/string_flags.png',
+                              width: 230,
+                              height: 130,
+                            ),
+                          ),
+
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    height: 44,
+                                    margin: const EdgeInsets.only(left: 12),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 12,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(20),
+                                      border: Border.all(
+                                        color: Color(0xFFC35257),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      children: [
+                                        const Icon(
+                                          Icons.search,
+                                          color: Color(0xFF562F00),
+                                        ),
+                                        const SizedBox(width: 8),
+                                        const Expanded(
+                                          child: TextField(
+                                            decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText: "Search",
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
                           ),
                         ],
                       ),
                     ),
                   ),
+
+                  const SizedBox(width: 18),
+                  const Icon(Icons.person, size: 30, color: Color(0xFF562F00)),
                   const SizedBox(width: 12),
-                  Icon(Icons.person, size: 28, color: Colors.grey.shade700),
-                  const SizedBox(width: 12),
-                  Icon(Icons.notifications, size: 28, color: Colors.grey.shade700),
+                  const Icon(
+                    Icons.notifications,
+                    size: 30,
+                    color: Color(0xFF562F00),
+                  ),
                 ],
               ),
 
@@ -61,53 +95,51 @@ class CulturePage extends StatelessWidget {
 
               // Header
               Row(
+                mainAxisAlignment: MainAxisAlignment.center, // centers horizontally
                 children: [
-                  const Expanded(
-                    child: Text(
-                      "IGBO",
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black87,
-                      ),
+                  const Text(
+                    "IGBO",
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
                     ),
                   ),
-                  const SizedBox(width: 6),
-                  Image.asset('assets/flag.png', width: 100, height: 160),
+                  const SizedBox(width: 10),
+                  Image.asset('assets/flag.png', width: 100, height: 140),
                 ],
               ),
 
               const SizedBox(height: 10),
 
 
-              //  ORANGE BACKGROUND SECTION
              Expanded(
                 child: Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.orange.shade100,
+                    color:  Color(0xFFFFFDF1),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: ListView(
                     children: [
                       _buildCard(
                         title: 'History',
-                        borderColor: Colors.orange,
+                        borderColor:  Color(0xFFFF9644),
                       ),
                       const SizedBox(height: 16),
                       _buildCard(
                         title: 'Language',
-                        borderColor: Colors.brown,
+                        borderColor: Color(0xFF562F00),
                       ),
                       const SizedBox(height: 16),
                       _buildCard(
                         title: 'Food',
-                        borderColor: Colors.brown,
+                        borderColor:  Color(0xFFFF9644),
                       ),
                       const SizedBox(height: 16),
                       _buildCard(
                         title: 'Cultures',
-                        borderColor: Colors.brown,
+                        borderColor: Color(0xFF562F00),
                       ),
                     ],
                   ),
@@ -130,37 +162,47 @@ class CulturePage extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: borderColor, width: 2),
+        border: Border.all(color: borderColor, width: 3),
       ),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-      
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
+            child: Center( 
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    title,
+                    textAlign: TextAlign.center, 
+                    style: const TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF562F00),
                     ),
                   ),
-                  child: const Text('Discover'),
-                ),
-              ],
+                  const SizedBox(height: 12),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFFF9644),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: const Text(
+                      'Discover',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
-
         ],
       ),
     );

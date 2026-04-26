@@ -69,7 +69,10 @@ flutter:
     - assets/community.png
     - assets/flag.png
     - assets/string_flags.png
-    
+    - assets/tradition_1.webp
+    - assets/tradition_2.webp
+    - assets/tradition_4.jpg
+    - assets/tradition_5.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
