@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'splash_screen.dart';
-import 'register_page.dart';
-import 'login_page.dart';
-import 'welcome_page.dart';
-import 'origin_page.dart';
-import 'home.dart';
-import 'your_culture.dart';
-import 'history.dart';
+import 'screens/splash_screen.dart';
+import 'auth/register_page.dart';
+import 'auth/login_page.dart';
+import 'screens/welcome_page.dart';
+import 'screens/origin_page.dart';
+import 'screens/home.dart';
+import 'screens/your_culture.dart';
+import 'screens/history.dart';
+import 'screens/languages.dart';
+import 'screens/teacher.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +39,8 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const HomePage(),
         '/your_culture': (context) => const CulturePage(),
         '/history': (context) => const HistoryPage(),
+        '/languages': (context) => const LanguagePage(),
+        '/teacher': (context) => const TeacherPage(),
       },
     );
   }
