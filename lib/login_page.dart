@@ -103,10 +103,10 @@ class LoginPage extends StatelessWidget {
                       onTap: () {
                         Navigator.pushNamed(context, '/register');
                       },
-                      child: const Text(
+                      child: Text(
                         'Register',
                         style: TextStyle(
-                          color: const Color.fromARGB(255, 78, 48, 37),
+                          color: Color.fromARGB(255, 78, 48, 37),
                           fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),

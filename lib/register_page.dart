@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -10,6 +11,47 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   bool isStepTwo = false;
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController confirmEmailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
+  Future<void> registerUser() async {
+    if (emailController.text != confirmEmailController.text) {
+      showError("Emails do not match");
+      return;
+    }
+
+    if (passwordController.text != confirmPasswordController.text) {
+      showError("Passwords do not match");
+      return;
+    }
+
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+
+      if (mounted) {
+        Navigator.pushNamed(context, '/welcome');
+      }
+    } on FirebaseAuthException catch (e) {
+      showError(e.message ?? "Registration failed");
+    }
+  }
+
+  void showError(String message) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
+
+  Future<void> signInWithGoogle() async {
+    // Google Sign-In functionality - to be implemented with proper package configuration
+    showError("Google Sign-In is not configured yet");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
         TextField(
           autocorrect: false,
+          controller: emailController,
           decoration: InputDecoration(
             labelText: 'Email',
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
@@ -80,6 +123,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
         TextField(
           autocorrect: false,
+          controller: confirmEmailController,
           decoration: InputDecoration(
             labelText: 'Confirm Email',
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
@@ -141,7 +185,7 @@ class _RegisterPageState extends State<RegisterPage> {
         SignInButton(
           Buttons.Google,
           text: 'Continue with Google',
-          onPressed: () {},
+          onPressed: signInWithGoogle,
         ),
         const SizedBox(height: 15),
 
@@ -160,7 +204,7 @@ class _RegisterPageState extends State<RegisterPage> {
               child: const Text(
                 'Login',
                 style: TextStyle(
-                  color: const Color.fromARGB(255, 78, 48, 37),
+                  color: Color.fromARGB(255, 78, 48, 37),
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
@@ -186,20 +230,23 @@ class _RegisterPageState extends State<RegisterPage> {
         const SizedBox(height: 20),
 
         TextField(
-          obscureText: true,
+          controller: passwordController,
           autocorrect: false,
           enableSuggestions: false,
+          obscureText: true,
           decoration: InputDecoration(
             labelText: 'Password',
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
           ),
         ),
+
         const SizedBox(height: 20),
 
         TextField(
-          obscureText: true,
+          controller: confirmPasswordController,
           autocorrect: false,
           enableSuggestions: false,
+          obscureText: true,
           decoration: InputDecoration(
             labelText: 'Confirm Password',
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
@@ -213,10 +260,7 @@ class _RegisterPageState extends State<RegisterPage> {
           width: double.infinity,
           height: 50,
           child: ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/welcome');
-              // handle register
-            },
+            onPressed: registerUser,
             style: ElevatedButton.styleFrom(
               backgroundColor: Color.fromARGB(248, 252, 131, 50),
               textStyle: const TextStyle(
@@ -277,10 +321,10 @@ class _RegisterPageState extends State<RegisterPage> {
               onTap: () {
                 Navigator.pushNamed(context, '/login');
               },
-              child: const Text(
+              child: Text(
                 'Login',
                 style: TextStyle(
-                  color: const Color.fromARGB(255, 78, 48, 37),
+                  color: Color.fromARGB(255, 78, 48, 37),
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class OriginPage extends StatelessWidget {
   const OriginPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +64,7 @@ class OriginPage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
+                      Navigator.pushNamed(context, '/home');
                       // Handle done
                     },
                     child: Text('Done'),
