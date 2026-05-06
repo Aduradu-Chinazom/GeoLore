@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HistoryPage extends StatelessWidget {
-  const HistoryPage({super.key});
+  final int currentIndex;
+  const HistoryPage({super.key, this.currentIndex = 1});
 
   @override
   Widget build(BuildContext context) {
@@ -118,7 +119,10 @@ class HistoryPage extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(25),
-                          border: Border.all(color: Color(0xFF562F00), width: 2.5),
+                          border: Border.all(
+                            color: Color(0xFF562F00),
+                            width: 2.5,
+                          ),
                         ),
                         child: SingleChildScrollView(
                           child: Column(
@@ -129,11 +133,21 @@ class HistoryPage extends StatelessWidget {
                               Center(
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: const Color.fromARGB(255, 91, 20, 20), 
+                                    color: const Color.fromARGB(
+                                      255,
+                                      91,
+                                      20,
+                                      20,
+                                    ),
                                     borderRadius: BorderRadius.circular(18),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: const Color.fromARGB(255, 18, 4, 4).withOpacity(0.2),
+                                        color: const Color.fromARGB(
+                                          255,
+                                          18,
+                                          4,
+                                          4,
+                                        ).withOpacity(0.2),
                                         blurRadius: 8,
                                         offset: const Offset(0, 4),
                                       ),
@@ -149,7 +163,7 @@ class HistoryPage extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                        ),
+                              ),
 
                               const SizedBox(height: 15),
 
@@ -157,7 +171,10 @@ class HistoryPage extends StatelessWidget {
                               const Text(
                                 "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo dolorem quos ipsa. Consequatur odio ullam maxime aliquam atque, quaerat, ducimus, expedita dolores a neque necessitatibus reprehenderit! Officia, repellat nihil cum corporis delectus minus nostrum dolorum optio sunt odit quas a modi velit ex blanditiis libero atque, cumque? Nihil eius eaque asperiores ipsam aperiam nam sequi nihil perferendis laborum quod distinctio. Odio quod, deserunt aliquid totam nulla molestias repudiandae eaque voluptas? Perspiciatis unde quisquam repellat alias minima! Laboriosam magni, fugiat quisquam, non iure cumque obcaecati asperiores cupiditate excepturi distinctio alias numquam similique ullam, tempora minus vitae ea pariatur libero possimus porro soluta.",
                                 textAlign: TextAlign.justify,
-                                style: TextStyle(fontSize: 16, color: Colors.black87),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.black87,
+                                ),
                               ),
                             ],
                           ),
@@ -169,34 +186,37 @@ class HistoryPage extends StatelessWidget {
 
                     // BACK BUTTON
                     Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: 140,
-                        height: 45,
-                        child: ElevatedButton.icon(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(Icons.arrow_back, color: Colors.white),
-                          label: const Text(
-                            "Back",
-                            style: TextStyle(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        SizedBox(
+                          width: 140,
+                          height: 45,
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back,
                               color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFFF9644),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
+                            label: const Text(
+                              "Back",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFFFF9644),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
                     const SizedBox(height: 10),
                   ],

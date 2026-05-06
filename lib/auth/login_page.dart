@@ -93,11 +93,15 @@ class _LoginPageState extends State<LoginPage> {
                           return;
                         }
 
-                        Navigator.pushNamed(context, '/welcome');
+                        Navigator.pushNamed(context, '/home');
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(248, 252, 131, 50),
+                        backgroundColor: const Color.fromARGB(
+                          248,
+                          252,
+                          131,
+                          50,
+                        ),
                         foregroundColor: Colors.white,
                         textStyle: const TextStyle(
                           fontSize: 18,

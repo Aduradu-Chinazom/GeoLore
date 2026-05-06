@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final int curentIndex;
+  const HomePage({super.key, this.curentIndex = 2});
 
   @override
   Widget build(BuildContext context) {
@@ -151,6 +152,20 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        height: 60,
+        decoration: BoxDecoration(color: Color(0xFF562F00)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: const [
+            Icon(Icons.chat, color: Colors.orange),
+            Icon(Icons.school, color: Colors.orange),
+            Icon(Icons.home, color: Colors.orange),
+            Icon(Icons.person, color: Colors.orange),
+            Icon(Icons.people, color: Colors.orange),
+          ],
         ),
       ),
     );

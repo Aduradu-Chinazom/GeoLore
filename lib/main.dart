@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/', //Splash screen first
       routes: {
         '/': (context) => const SplashScreen(),
+        // '/': (context) => const RecipesPage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/welcome': (context) => const WelcomePage(),

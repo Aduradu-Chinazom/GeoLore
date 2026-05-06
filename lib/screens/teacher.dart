@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../Widget/ReviewItem.dart';
+import 'bookappointment.dart';
 
 class TeacherPage extends StatelessWidget {
   const TeacherPage({super.key});
@@ -21,16 +22,20 @@ class TeacherPage extends StatelessWidget {
                 children: [
                   Image.asset(
                     'assets/string_flags.png',
-                    width: 150, height: 130
+                    width: 150,
+                    height: 130,
                   ),
                   Row(
                     children: const [
-                      Icon(Icons.person, color: Color(0xFF562F00), size: 30,),
+                      Icon(Icons.person, color: Color(0xFF562F00), size: 30),
                       SizedBox(width: 10),
-                      Icon(Icons.notifications,
-                          color: Color(0xFF562F00), size: 30,),
+                      Icon(
+                        Icons.notifications,
+                        color: Color(0xFF562F00),
+                        size: 30,
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
 
@@ -70,15 +75,24 @@ class TeacherPage extends StatelessWidget {
                       Row(
                         children: List.generate(
                           3,
-                          (index) => const Icon(Icons.star,
-                              color: Colors.orange, size: 18),
+                          (index) => const Icon(
+                            Icons.star,
+                            color: Colors.orange,
+                            size: 18,
+                          ),
                         ),
                       ),
 
                       const SizedBox(height: 5),
 
-                      const Text("22 registered students", style: TextStyle(fontSize: 16),),
-                      const Text("Based in Nigeria", style: TextStyle(fontSize: 16),),
+                      const Text(
+                        "22 registered students",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      const Text(
+                        "Based in Nigeria",
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ],
                   ),
                 ],
@@ -91,7 +105,14 @@ class TeacherPage extends StatelessWidget {
                 width: double.infinity,
                 height: 45,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BookAppointmentPage(),
+                      ),
+                    );
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFF9644),
                     shape: RoundedRectangleBorder(
@@ -118,7 +139,7 @@ class TeacherPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(color: Color(0xFF562F00),  width: 2),
+                    border: Border.all(color: Color(0xFF562F00), width: 2),
                   ),
                   child: ListView(
                     children: const [
