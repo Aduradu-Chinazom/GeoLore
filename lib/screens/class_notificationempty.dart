@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class NotificationEmptyPage extends StatelessWidget {
+class ClassNotificationempty extends StatelessWidget {
   final int currentIndex;
 
-  const NotificationEmptyPage({super.key, this.currentIndex = 1});
+  const ClassNotificationempty({super.key, this.currentIndex = 1});
 
   @override
   Widget build(BuildContext context) {

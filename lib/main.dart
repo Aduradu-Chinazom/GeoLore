@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:geo_lore/screens/communitygroupspage.dart';
 import 'firebase_options.dart';
-import 'screens/splash_screen.dart';
+// import 'screens/splash_screen.dart';
 import 'auth/register_page.dart';
 import 'auth/login_page.dart';
 import 'screens/welcome_page.dart';
@@ -31,8 +32,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       initialRoute: '/', //Splash screen first
       routes: {
-        '/': (context) => const SplashScreen(),
-        // '/': (context) => const RecipesPage(),
+        // '/': (context) => const SplashScreen(),
+        '/': (context) => const CommunityGroupsPage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/welcome': (context) => const WelcomePage(),

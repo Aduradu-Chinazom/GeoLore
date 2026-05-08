@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class NotificationListPage extends StatelessWidget {
+class ClassNotificationList extends StatelessWidget {
   final int currentIndex;
 
-  const NotificationListPage({super.key, this.currentIndex = 1});
+  const ClassNotificationList({super.key, this.currentIndex = 1});
 
   @override
   Widget build(BuildContext context) {
