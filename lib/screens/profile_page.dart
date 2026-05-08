@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:geo_lore/screens/clearcache_page.dart';
+import 'package:geo_lore/screens/languages_page.dart';
+import 'about_page.dart';
 import 'edit_profile_page.dart';
+import 'location_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -26,13 +30,14 @@ class ProfilePage extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const Icon(Icons.person,
-                          color: Color(0xFF562F00)),
+                      const Icon(Icons.person, color: Color(0xFF562F00)),
                       const SizedBox(width: 10),
                       Stack(
                         children: [
-                          const Icon(Icons.notifications,
-                              color: Color(0xFF562F00)),
+                          const Icon(
+                            Icons.notifications,
+                            color: Color(0xFF562F00),
+                          ),
                           Positioned(
                             right: 0,
                             child: Container(
@@ -49,11 +54,11 @@ class ProfilePage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          )
+                          ),
                         ],
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
 
@@ -89,8 +94,7 @@ class ProfilePage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  const EditProfilePage(),
+                              builder: (context) => const EditProfilePage(),
                             ),
                           );
                         },
@@ -98,9 +102,9 @@ class ProfilePage extends StatelessWidget {
                           backgroundColor: const Color(0xFFFF9644),
                         ),
                         child: const Text("Edit Profile"),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
 
@@ -108,30 +112,64 @@ class ProfilePage extends StatelessWidget {
 
               Expanded(
                 child: ListView(
-                  children: const [
+                  children: [
                     ProfileTile(
-                        icon: Icons.location_on,
-                        title: "Location"),
+                      icon: Icons.location_on,
+                      title: "Location",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LocationPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    ProfileTile(icon: Icons.language, title: "Language", onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LanguagesPage(),
+                          ),
+                        );
+                      },),
+
                     ProfileTile(
-                        icon: Icons.language,
-                        title: "Language"),
+                      icon: Icons.cleaning_services,
+                      title: "Clear cache",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ClearCachePage(),
+                          ),
+                        );
+                      },
+                    ),
                     ProfileTile(
-                        icon: Icons.cleaning_services,
-                        title: "Clear cache"),
-                    ProfileTile(
-                        icon: Icons.info,
-                        title: "About GeoLore"),
-                    ProfileTile(
-                        icon: Icons.school,
-                        title: "Language Tutor"),
-                    ProfileTile(
+                      icon: Icons.info,
+                      title: "About GeoLore",
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AboutGeoLorePage(),
+                          ),
+                        );
+                      },
+                    ),
+                    const ProfileTile(
+                      icon: Icons.school,
+                      title: "Language Tutor",
+                    ),
+                    const ProfileTile(
                       icon: Icons.logout,
                       title: "Log out",
                       isLogout: true,
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -159,27 +197,33 @@ class ProfileTile extends StatelessWidget {
   final IconData icon;
   final String title;
   final bool isLogout;
+  final VoidCallback? onTap;
 
   const ProfileTile({
     super.key,
     required this.icon,
     required this.title,
     this.isLogout = false,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
+
       leading: Icon(
         icon,
         color: isLogout ? Colors.red : const Color(0xFF562F00),
       ),
+
       title: Text(
         title,
         style: TextStyle(
           color: isLogout ? Colors.red : const Color(0xFF562F00),
         ),
       ),
+
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
     );
   }

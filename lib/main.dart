@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:geo_lore/screens/communitygroupspage.dart';
+import 'package:geo_lore/screens/communitygroups_page.dart';
 import 'firebase_options.dart';
 // import 'screens/splash_screen.dart';
 import 'auth/register_page.dart';
