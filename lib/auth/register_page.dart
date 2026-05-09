@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -43,14 +44,34 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void showError(String message) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   Future<void> signInWithGoogle() async {
-    // Google Sign-In functionality - to be implemented with proper package configuration
-    showError("Google Sign-In is not configured yet");
+    try {
+      final GoogleSignInAccount googleUser =
+          await GoogleSignIn.instance.authenticate();
+
+      final GoogleSignInAuthentication authentication =
+          googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: authentication.accessToken,
+        idToken: authentication.idToken,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
+
+      if (mounted) {
+        Navigator.pushNamed(context, '/community');
+      }
+    } on FirebaseAuthException catch (e) {
+      showError(e.message ?? "Google Sign-In failed");
+    } catch (e) {
+      showError(e.toString());
+    }
   }
 
   @override
@@ -65,10 +86,8 @@ class _RegisterPageState extends State<RegisterPage> {
               children: [
                 const SizedBox(height: 40),
 
-                // Image
                 Image.asset('assets/Charming chibi tiger cub.png', height: 150),
 
-                // Animated switch between steps
                 AnimatedSwitcher(
                   duration: const Duration(milliseconds: 400),
                   transitionBuilder: (child, animation) {
@@ -90,7 +109,6 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 
-  // ✅ STEP 1
   Widget buildStepOne() {
     return Column(
       key: const ValueKey(1),
@@ -129,17 +147,8 @@ class _RegisterPageState extends State<RegisterPage> {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
           ),
         ),
-
         const SizedBox(height: 20),
 
-        // Google Button
-        // SignInButton(
-        //   Buttons.Google,
-        //   text: "Continue with Google",
-        //   onPressed: () {},
-        // ),
-
-        // const SizedBox(height: 30),
         SizedBox(
           width: double.infinity,
           height: 50,
@@ -150,7 +159,7 @@ class _RegisterPageState extends State<RegisterPage> {
               });
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(248, 252, 131, 50),
+              backgroundColor: const Color.fromARGB(248, 252, 131, 50),
               textStyle: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -171,7 +180,6 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         const SizedBox(height: 15),
 
-        //OR
         const Text(
           'OR',
           style: TextStyle(
@@ -179,7 +187,6 @@ class _RegisterPageState extends State<RegisterPage> {
             color: Color.fromARGB(255, 56, 56, 56),
           ),
         ),
-
         const SizedBox(height: 15),
 
         SignInButton(
@@ -189,12 +196,11 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         const SizedBox(height: 15),
 
-        //Already have an account? Login
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Already have an account?',
+              'Already have an account? ',
               style: TextStyle(color: Colors.black, fontSize: 14),
             ),
             GestureDetector(
@@ -212,11 +218,11 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ],
         ),
+        const SizedBox(height: 20),
       ],
     );
   }
 
-  //  STEP 2
   Widget buildStepTwo() {
     return Column(
       key: const ValueKey(2),
@@ -239,7 +245,6 @@ class _RegisterPageState extends State<RegisterPage> {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
           ),
         ),
-
         const SizedBox(height: 20),
 
         TextField(
@@ -252,17 +257,15 @@ class _RegisterPageState extends State<RegisterPage> {
             border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
           ),
         ),
-
         const SizedBox(height: 30),
 
-        // Register Button
         SizedBox(
           width: double.infinity,
           height: 50,
           child: ElevatedButton(
             onPressed: registerUser,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(248, 252, 131, 50),
+              backgroundColor: const Color.fromARGB(248, 252, 131, 50),
               textStyle: const TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -277,21 +280,8 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ),
         ),
-
-        const SizedBox(height: 10),
-
-        // // Back Button
-        // TextButton(
-        //   onPressed: () {
-        //     setState(() {
-        //       isStepTwo = false;
-        //     });
-        //   },
-        //   child: const Text("Back"),
-        // ),
         const SizedBox(height: 15),
 
-        //OR
         const Text(
           'OR',
           style: TextStyle(
@@ -299,32 +289,30 @@ class _RegisterPageState extends State<RegisterPage> {
             color: Color.fromARGB(255, 56, 56, 56),
           ),
         ),
-
         const SizedBox(height: 15),
 
         SignInButton(
           Buttons.Google,
           text: 'Continue with Google',
-          onPressed: () {},
+          onPressed: signInWithGoogle, // ← fixed, was () {}
         ),
         const SizedBox(height: 15),
 
-        //Already have an account? Login
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              'Already have an account?',
+              'Already have an account? ',
               style: TextStyle(color: Colors.black, fontSize: 14),
             ),
             GestureDetector(
               onTap: () {
                 Navigator.pushNamed(context, '/login');
               },
-              child: Text(
+              child: const Text(
                 'Login',
                 style: TextStyle(
-                  color: const Color.fromARGB(255, 78, 48, 37),
+                  color: Color.fromARGB(255, 78, 48, 37),
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
@@ -332,7 +320,12 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
           ],
         ),
+        const SizedBox(height: 20),
       ],
     );
   }
+}
+
+extension on GoogleSignInAuthentication {
+  String? get accessToken => null;
 }
