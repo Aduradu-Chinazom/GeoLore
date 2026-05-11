@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:geo_lore/screens/communitygroupspage.dart';
+//import 'package:geo_lore/screens/communitygroupspage.dart';
+import 'package:geo_lore/main_layout.dart';
+import 'package:geo_lore/screens/traditions_page.dart';
 import 'firebase_options.dart';
 import 'auth/register_page.dart';
 import 'auth/login_page.dart';
 import 'screens/welcome_page.dart';
 import 'screens/origin_page.dart';
-import 'screens/home.dart';
-import 'screens/your_culture.dart';
-import 'screens/history.dart';
-import 'screens/languages.dart';
-import 'screens/teacher.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,18 +25,15 @@ class MyApp extends StatelessWidget {
       title: 'Geolore',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const AuthGate(), // ← use home instead of initialRoute
+      home: const AuthGate(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/welcome': (context) => const WelcomePage(),
         '/origin': (context) => const OriginPage(),
-        '/home': (context) => const HomePage(),
-        '/your_culture': (context) => const CulturePage(),
-        '/history': (context) => const HistoryPage(),
-        '/languages': (context) => const LanguagePage(),
-        '/teacher': (context) => const TeacherPage(),
-        '/community': (context) => const CommunityGroupsPage(),
+        '/main': (context) => const MainLayout(initialIndex: 2),
+        //'/community': (context) => const MainLayout(initialIndex: 4),
+        '/traditions': (context) => const TraditionsPage(),
       },
     );
   }
@@ -54,19 +48,16 @@ class AuthGate extends StatelessWidget {
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
-        // Still loading
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Scaffold(
             body: Center(child: CircularProgressIndicator()),
           );
         }
 
-        // Logged in → go to app
         if (snapshot.hasData) {
-          return const CommunityGroupsPage();
+          return const MainLayout(initialIndex: 4); // Start on Community page
         }
 
-        // Not logged in → go to login
         return const LoginPage();
       },
     );
