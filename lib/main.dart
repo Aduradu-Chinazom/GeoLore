@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:geo_lore/screens/communitygroupspage.dart';
 import 'package:geo_lore/main_layout.dart';
 import 'package:geo_lore/screens/traditions_page.dart';
+import 'package:geo_lore/screens/fashion_page.dart';
+import 'package:geo_lore/screens/festival_page.dart';
 import 'firebase_options.dart';
 import 'auth/register_page.dart';
 import 'auth/login_page.dart';
@@ -34,6 +36,8 @@ class MyApp extends StatelessWidget {
         '/main': (context) => const MainLayout(initialIndex: 2),
         //'/community': (context) => const MainLayout(initialIndex: 4),
         '/traditions': (context) => const TraditionsPage(),
+        '/fashion': (context) => const FashionPage(),
+        '/festival': (context) => const FestivalPage(),
       },
     );
   }

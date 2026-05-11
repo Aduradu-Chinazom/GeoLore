@@ -79,6 +79,12 @@ flutter:
     - assets/tradition_4.jpg
     - assets/tradition_5.jpg
     - assets/tradition_6.jpg
+    - assets/festivalOne.jpg
+    - assets/festivalTwo.webp
+    - assets/festivalThree.jpg
+    - assets/festivalFour.jpg
+    - assets/festivalFive.webp
+    - assets/festivalSix.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

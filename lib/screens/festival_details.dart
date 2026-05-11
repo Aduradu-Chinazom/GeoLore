@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:geo_lore/main_layout.dart';
 
-class Tradition extends StatelessWidget {
+class FestivalDetails extends StatelessWidget {
   final String title;
   final String imagePath;
   
-  const Tradition({
+  const FestivalDetails({
     super.key, 
     required this.title,
     required this.imagePath,
