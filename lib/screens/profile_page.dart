@@ -1,186 +1,371 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:geo_lore/main_layout.dart';
 import 'edit_profile_page.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
   @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  File? _profileImage;
+
+  Future<void> _pickImage() async {
+    final picked = await ImagePicker().pickImage(
+      source: ImageSource.camera,
+      imageQuality: 85,
+    );
+
+    if (picked != null) {
+      setState(() {
+        _profileImage = File(picked.path);
+      });
+    }
+  }
+
+  void _navigateToMain(BuildContext context, int index) {
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => MainLayout(initialIndex: index),
+      ),
+      (route) => false,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    const brown = Color(0xFF562F00);
+    const orange = Color(0xFFFF9644);
+
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF1),
 
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 18),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
 
+              // ================= HEADER =================
+              SizedBox(
+                height: 78,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Positioned(
+                      left: -10,
+                      top: -28,
+                      child: Image.asset(
+                        'assets/string_flags.png',
+                        width: 230,
+                        height: 130,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Container(
+                            height: 44,
+                            margin: const EdgeInsets.only(top: 12),
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(18),
+                              border: Border.all(
+                                color: const Color(0xFFC35257),
+                                width: 1.1,
+                              ),
+                            ),
+                            child: Row(
+                              children: const [
+                                Icon(
+                                  Icons.search,
+                                  color: brown,
+                                  size: 20,
+                                ),
+                                SizedBox(width: 8),
+                                Text(
+                                  "Search",
+                                  style: TextStyle(
+                                    color: brown,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(width: 14),
+
+                        const Padding(
+                          padding: EdgeInsets.only(top: 10),
+                          child: Icon(
+                            Icons.person,
+                            color: brown,
+                            size: 28,
+                          ),
+                        ),
+
+                        const SizedBox(width: 10),
+
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Stack(
+                            children: [
+                              const Icon(
+                                Icons.notifications_none,
+                                color: brown,
+                                size: 28,
+                              ),
+
+                              Positioned(
+                                right: 0,
+                                top: 0,
+                                child: Container(
+                                  width: 16,
+                                  height: 16,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      "5",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 9,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 18),
+
+              // ================= PROFILE INFO =================
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/string_flags.png',
-                    width: 150,
-                    height: 130,
+                  // PROFILE IMAGE
+                  GestureDetector(
+                    onTap: _pickImage,
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: 118,
+                          height: 118,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: brown,
+                              width: 1.5,
+                            ),
+                            image: _profileImage != null
+                                ? DecorationImage(
+                                    image: FileImage(_profileImage!),
+                                    fit: BoxFit.cover,
+                                  )
+                                : null,
+                            color: const Color(0xFFF3E4D5),
+                          ),
+                          child: _profileImage == null
+                              ? const Icon(
+                                  Icons.person,
+                                  size: 55,
+                                  color: brown,
+                                )
+                              : null,
+                        ),
+                      ],
+                    ),
                   ),
-                  Row(
-                    children: [
-                      const Icon(Icons.person,
-                          color: Color(0xFF562F00)),
-                      const SizedBox(width: 10),
-                      Stack(
+
+                  const SizedBox(width: 25),
+
+                  // NAME + EMAIL + BUTTON
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Icon(Icons.notifications,
-                              color: Color(0xFF562F00)),
-                          Positioned(
-                            right: 0,
-                            child: Container(
-                              padding: const EdgeInsets.all(4),
-                              decoration: const BoxDecoration(
-                                color: Colors.red,
-                                shape: BoxShape.circle,
+                          const Text(
+                            "Queen Barbs",
+                            style: TextStyle(
+                              fontSize: 27,
+                              fontWeight: FontWeight.bold,
+                              color: brown,
+                            ),
+                          ),
+
+                          const SizedBox(height: 1),
+
+                          Text(
+                            "chris@gmail.com",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: brown.withOpacity(0.75),
+                            ),
+                          ),
+
+                          const SizedBox(height: 10),
+
+                          SizedBox(
+                            width: 140,
+                            height: 38,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        const EditProfilePage(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: orange,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.circular(10),
+                                ),
                               ),
                               child: const Text(
-                                '5',
+                                "Edit Profile",
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 10,
+                                  fontWeight: FontWeight.w800,
+                                  fontSize: 18,
                                 ),
                               ),
                             ),
-                          )
+                          ),
                         ],
-                      )
-                    ],
-                  )
-                ],
-              ),
-
-              const SizedBox(height: 10),
-
-              Row(
-                children: [
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundImage: AssetImage('assets/profile.jpg'),
-                  ),
-
-                  const SizedBox(width: 15),
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Queen Barbs",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF562F00),
-                        ),
                       ),
-
-                      const Text("chris@gmail.com"),
-
-                      const SizedBox(height: 10),
-
-                      ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  const EditProfilePage(),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFFF9644),
-                        ),
-                        child: const Text("Edit Profile"),
-                      )
-                    ],
-                  )
+                    ),
+                  ),
                 ],
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 38),
 
+              // ================= MENU =================
               Expanded(
                 child: ListView(
-                  children: const [
-                    ProfileTile(
-                        icon: Icons.location_on,
-                        title: "Location"),
-                    ProfileTile(
-                        icon: Icons.language,
-                        title: "Language"),
-                    ProfileTile(
-                        icon: Icons.cleaning_services,
-                        title: "Clear cache"),
-                    ProfileTile(
-                        icon: Icons.info,
-                        title: "About GeoLore"),
-                    ProfileTile(
-                        icon: Icons.school,
-                        title: "Language Tutor"),
-                    ProfileTile(
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    _buildMenuItem(
+                      icon: Icons.location_on_outlined,
+                      title: "Location",
+                    ),
+
+                    _buildMenuItem(
+                      icon: Icons.language,
+                      title: "Language",
+                    ),
+
+                    _buildMenuItem(
+                      icon: Icons.sync,
+                      title: "Clear cache",
+                    ),
+
+                    _buildMenuItem(
+                      icon: Icons.history,
+                      title: "About GeoLore",
+                    ),
+
+                    _buildMenuItem(
+                      icon: Icons.public,
+                      title: "Language Tutor",
+                    ),
+
+                    _buildMenuItem(
                       icon: Icons.logout,
                       title: "Log out",
                       isLogout: true,
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
       ),
 
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: BoxDecoration(color: Color(0xFF562F00)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
-            Icon(Icons.chat, color: Colors.orange),
-            Icon(Icons.school, color: Colors.orange),
-            Icon(Icons.home, color: Colors.orange),
-            Icon(Icons.person, color: Colors.orange),
-            Icon(Icons.people, color: Colors.orange),
-          ],
+    );
+  }
+
+  Widget _buildMenuItem({
+    required IconData icon,
+    required String title,
+    bool isLogout = false,
+  }) {
+    const brown = Color(0xFF562F00);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 6,
+            horizontal: 2,
+          ),
+          child: Row(
+            children: [
+              Icon(
+                icon,
+                color: isLogout ? Colors.red : brown,
+                size: 28,
+              ),
+
+              const SizedBox(width: 18),
+
+              Expanded(
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: isLogout ? Colors.red : brown,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+
+              Icon(
+                Icons.chevron_right,
+                color: brown.withOpacity(0.7),
+                size: 28,
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class ProfileTile extends StatelessWidget {
-  final IconData icon;
-  final String title;
-  final bool isLogout;
-
-  const ProfileTile({
-    super.key,
-    required this.icon,
-    required this.title,
-    this.isLogout = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(
-        icon,
-        color: isLogout ? Colors.red : const Color(0xFF562F00),
-      ),
-      title: Text(
-        title,
-        style: TextStyle(
-          color: isLogout ? Colors.red : const Color(0xFF562F00),
-        ),
-      ),
-      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-    );
-  }
-}

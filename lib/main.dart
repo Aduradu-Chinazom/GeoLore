@@ -11,6 +11,7 @@ import 'auth/register_page.dart';
 import 'auth/login_page.dart';
 import 'screens/welcome_page.dart';
 import 'screens/origin_page.dart';
+import 'screens/profile_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/traditions': (context) => const TraditionsPage(),
         '/fashion': (context) => const FashionPage(),
         '/festival': (context) => const FestivalPage(),
+        '/profile': (context) => const ProfilePage(),
       },
     );
   }

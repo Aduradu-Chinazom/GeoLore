@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:geo_lore/screens/communitygroupspage.dart';
 import 'package:geo_lore/screens/home.dart';
+import 'package:geo_lore/screens/profile_page.dart';
 //import 'package:geo_lore/screens/languages.dart';
 import 'package:geo_lore/screens/teacher.dart';
-import 'package:geo_lore/screens/your_culture.dart';
 //import 'package:geo_lore/screens/history.dart';
 import 'package:geo_lore/screens/ai_chat_page.dart';
 
@@ -24,7 +24,7 @@ class MainLayoutState extends State<MainLayout> {
     const AiChatPage(),           // Index 0 - Chat/AI Tutor
     const TeacherPage(),          // Index 1 - School/Teacher
     const HomePage(),             // Index 2 - Home
-    const CulturePage(),          // Index 3 - Person/Your Culture
+    const ProfilePage(),          // Index 3 - Profile
     const CommunityGroupsPage(),  // Index 4 - Community
   ];
 
@@ -60,7 +60,7 @@ class MainLayoutState extends State<MainLayout> {
             _buildNavItem(Icons.chat, 0, 'Chat'),
             _buildNavItem(Icons.school, 1, 'Teacher'),
             _buildNavItem(Icons.home, 2, 'Home'),
-            _buildNavItem(Icons.person, 3, 'Culture'),
+            _buildNavItem(Icons.person, 3, 'Profile'),
             _buildNavItem(Icons.people, 4, 'Community'),
           ],
         ),
