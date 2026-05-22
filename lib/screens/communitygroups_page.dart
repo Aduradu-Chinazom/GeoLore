@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:geo_lore/main_layout.dart';
 import 'package:geo_lore/Widget/components.dart';
 import 'package:geo_lore/Widget/components2.dart';
 
@@ -45,20 +46,6 @@ class CommunityGroupsPage extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-      bottomNavigationBar: Container(
-        height: 60,
-        color: const Color(0xFF562F00),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Icon(Icons.chat, color: Colors.white),
-            Icon(Icons.school, color: Colors.white),
-            Icon(Icons.home, color: Colors.white),
-            Icon(Icons.person, color: Colors.white),
-            Icon(Icons.people, color:  Colors.orange),
-          ],
         ),
       ),
     );

@@ -1,26 +1,36 @@
 {
   "project_info": {
-    "project_number": "678405144548",
-    "project_id": "geolore-e764f",
-    "storage_bucket": "geolore-e764f.firebasestorage.app"
+    "project_number": "590476092444",
+    "project_id": "geolore-35a85",
+    "storage_bucket": "geolore-35a85.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:678405144548:android:9d05c325a353d2e62411f1",
+        "mobilesdk_app_id": "1:590476092444:android:ec71c28a22994e646f6bd9",
         "android_client_info": {
           "package_name": "com.example.geo_lore"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "590476092444-t5u1jes6romuan3sab7cadif7bjrhfe5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyA91Q1Zb-JOXT-e0NBgkb0FLrXHILnsb4U"
+          "current_key": "AIzaSyCAoaIUkCvCH6UCM3iA3miUmU7h-IU1FJU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590476092444-t5u1jes6romuan3sab7cadif7bjrhfe5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

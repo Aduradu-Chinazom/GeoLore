@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../Widget/app_drawer.dart';
+
+import 'app_drawer.dart';
 
 class AiChatPage extends StatefulWidget {
   const AiChatPage({super.key});
@@ -22,8 +23,6 @@ class _AiChatPageState extends State<AiChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFFDF1),
-      drawer: const AppDrawer(),
-
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -154,21 +153,6 @@ class _AiChatPageState extends State<AiChatPage> {
               const SizedBox(height: 15),
             ],
           ),
-        ),
-      ),
-
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: BoxDecoration(color: Color(0xFF562F00)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
-            Icon(Icons.chat, color: Colors.orange),
-            Icon(Icons.school, color: Colors.orange),
-            Icon(Icons.home, color: Colors.orange),
-            Icon(Icons.person, color: Colors.orange),
-            Icon(Icons.people, color: Colors.orange),
-          ],
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geo_lore/main_layout.dart';
 
 class HomePage extends StatelessWidget {
   final int curentIndex;
@@ -7,7 +8,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFFFDF1),
+      backgroundColor: const Color(0xFFFFFDF1),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -35,7 +36,6 @@ class HomePage extends StatelessWidget {
                               height: 130,
                             ),
                           ),
-
                           Align(
                             alignment: Alignment.centerLeft,
                             child: Row(
@@ -51,17 +51,17 @@ class HomePage extends StatelessWidget {
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(20),
                                       border: Border.all(
-                                        color: Color(0xFFC35257),
+                                        color: const Color(0xFFC35257),
                                       ),
                                     ),
-                                    child: Row(
+                                    child: const Row(
                                       children: [
-                                        const Icon(
+                                        Icon(
                                           Icons.search,
                                           color: Color(0xFF562F00),
                                         ),
-                                        const SizedBox(width: 8),
-                                        const Expanded(
+                                        SizedBox(width: 8),
+                                        Expanded(
                                           child: TextField(
                                             decoration: InputDecoration(
                                               border: InputBorder.none,
@@ -80,7 +80,6 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(width: 18),
                   const Icon(Icons.person, size: 30, color: Color(0xFF562F00)),
                   const SizedBox(width: 12),
@@ -110,10 +109,9 @@ class HomePage extends StatelessWidget {
                   Image.asset('assets/logo.png', width: 100, height: 160),
                 ],
               ),
-
               const SizedBox(height: 8),
 
-              //  ORANGE BACKGROUND SECTION
+              // ORANGE BACKGROUND SECTION
               Expanded(
                 child: Container(
                   padding: const EdgeInsets.all(12),
@@ -126,25 +124,51 @@ class HomePage extends StatelessWidget {
                       _buildCard(
                         title: 'Learn About Your Culture',
                         image: const AssetImage('assets/culture.png'),
-                        borderColor: Color(0xFFFF9644),
+                        borderColor: const Color(0xFFFF9644),
+                        onTap: () {
+                          // Navigate within the MainLayout
+                          // We need to access the parent's state
+                          final MainLayoutState? mainLayoutState = 
+                              context.findAncestorStateOfType<MainLayoutState>();
+                          if (mainLayoutState != null) {
+                            mainLayoutState.setSelectedIndex(3); // Go to Culture page
+                          }
+                        },
                       ),
                       const SizedBox(height: 16),
                       _buildCard(
                         title: 'AI Tutor',
                         image: const AssetImage('assets/ai_tutor.png'),
-                        borderColor: Color(0xFF562F00),
+                        borderColor: const Color(0xFF562F00),
+                        onTap: () {
+                          final MainLayoutState? mainLayoutState = 
+                              context.findAncestorStateOfType<MainLayoutState>();
+                          if (mainLayoutState != null) {
+                            mainLayoutState.setSelectedIndex(0); // Go to Chat page
+                          }
+                        },
                       ),
                       const SizedBox(height: 16),
                       _buildCard(
                         title: 'Community',
                         image: const AssetImage('assets/community.png'),
-                        borderColor: Color(0xFFFF9644),
+                        borderColor: const Color(0xFFFF9644),
+                        onTap: () {
+                          final MainLayoutState? mainLayoutState = 
+                              context.findAncestorStateOfType<MainLayoutState>();
+                          if (mainLayoutState != null) {
+                            mainLayoutState.setSelectedIndex(4); // Go to Community page
+                          }
+                        },
                       ),
                       const SizedBox(height: 16),
                       _buildCard(
                         title: 'Events',
                         image: const AssetImage('assets/event.png'),
-                        borderColor: Color(0xFF562F00),
+                        borderColor: const Color(0xFF562F00),
+                        onTap: () {
+                          // Add events page or handle accordingly
+                        },
                       ),
                     ],
                   ),
@@ -154,20 +178,6 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: BoxDecoration(color: Color(0xFF562F00)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
-            Icon(Icons.chat, color: Colors.orange),
-            Icon(Icons.school, color: Colors.orange),
-            Icon(Icons.home, color: Colors.orange),
-            Icon(Icons.person, color: Colors.orange),
-            Icon(Icons.people, color: Colors.orange),
-          ],
-        ),
-      ),
     );
   }
 
@@ -175,6 +185,7 @@ class HomePage extends StatelessWidget {
     required String title,
     required ImageProvider image,
     required Color borderColor,
+    required VoidCallback onTap,
   }) {
     return Container(
       padding: const EdgeInsets.all(16),
@@ -185,7 +196,6 @@ class HomePage extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // LEFT SIDE (TEXT + BUTTON)
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -200,9 +210,9 @@ class HomePage extends StatelessWidget {
                 ),
                 const SizedBox(height: 28),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: onTap,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFFFF9644),
+                    backgroundColor: const Color(0xFFFF9644),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -219,8 +229,6 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-
-          // RIGHT SIDE (IMAGE)
           Image(image: image, width: 160, height: 160),
         ],
       ),

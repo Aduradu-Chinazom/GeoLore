@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:geo_lore/screens/communitygroups_page.dart';
+import 'package:geo_lore/screens/communitygroupspage.dart';
 import 'firebase_options.dart';
-// import 'screens/splash_screen.dart';
 import 'auth/register_page.dart';
 import 'auth/login_page.dart';
+import 'main_layout.dart';
+import 'screens/fashion_page.dart';
+import 'screens/festival_page.dart';
+import 'screens/traditions_page.dart';
 import 'screens/welcome_page.dart';
 import 'screens/origin_page.dart';
-import 'screens/home.dart';
-import 'screens/your_culture.dart';
-import 'screens/history.dart';
-import 'screens/languages.dart';
-import 'screens/teacher.dart';
+import 'screens/profile_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
@@ -23,26 +21,49 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Geolore',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.blue),
-      initialRoute: '/', //Splash screen first
+      home: const AuthGate(),
       routes: {
-        // '/': (context) => const SplashScreen(),
-        '/': (context) => const CommunityGroupsPage(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/welcome': (context) => const WelcomePage(),
         '/origin': (context) => const OriginPage(),
-        '/home': (context) => const HomePage(),
-        '/your_culture': (context) => const CulturePage(),
-        '/history': (context) => const HistoryPage(),
-        '/languages': (context) => const LanguagePage(),
-        '/teacher': (context) => const TeacherPage(),
+        '/main': (context) => const MainLayout(initialIndex: 2),
+        //'/community': (context) => const MainLayout(initialIndex: 4),
+        '/traditions': (context) => const TraditionsPage(),
+        '/fashion': (context) => const FashionPage(),
+        '/festival': (context) => const FestivalPage(),
+        '/profile': (context) => const ProfilePage(),
+      },
+    );
+  }
+}
+
+// Checks auth state and routes accordingly
+class AuthGate extends StatelessWidget {
+  const AuthGate({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
+
+        if (snapshot.hasData) {
+          return const MainLayout(initialIndex: 4); // Start on Community page
+        }
+
+        return const LoginPage();
       },
     );
   }

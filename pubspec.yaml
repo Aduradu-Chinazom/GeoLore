@@ -37,7 +37,10 @@ dependencies:
   firebase_core: ^4.7.0
   flutter_signin_button: ^2.0.0
   firebase_auth: ^6.4.0
-  google_sign_in: ^7.2.0
+  google_sign_in: ^6.2.1
+  cloud_firestore: ^6.3.0
+  image_picker: ^1.0.5
+
 
 dev_dependencies:
   flutter_test:
@@ -73,8 +76,16 @@ flutter:
     - assets/string_flags.png
     - assets/tradition_1.webp
     - assets/tradition_2.webp
+    - assets/tradition_3.jpg
     - assets/tradition_4.jpg
     - assets/tradition_5.jpg
+    - assets/tradition_6.jpg
+    - assets/festivalOne.jpg
+    - assets/festivalTwo.webp
+    - assets/festivalThree.jpg
+    - assets/festivalFour.jpg
+    - assets/festivalFive.webp
+    - assets/festivalSix.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
